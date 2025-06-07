@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>货物解析测试</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        textarea { width: 100%; height: 120px; margin: 10px 0; }
+        button { padding: 10px 20px; margin: 5px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .result { margin: 20px 0; padding: 15px; background: #f8f9fa; border-radius: 4px; }
+        .success { background: #d4edda; border: 1px solid #c3e6cb; }
+        .error { background: #f8d7da; border: 1px solid #f5c6cb; }
+        pre { white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚛 货物解析测试工具</h1>
+
+        <div>
+            <h3>测试输入：</h3>
+            <textarea id="cargoInput" placeholder="请输入货物信息...">货在深圳  -TAS  4件/8.95方/1210kg
+尺寸1336*706*2005*2件
+2546*781*1300*2件
+尺寸mm</textarea>
+        </div>
+
+        <div>
+            <button onclick="testParsing()">🔍 测试解析</button>
+            <button onclick="loadSample1()">📦 样本1: 多尺寸格式</button>
+            <button onclick="loadSample2()">📋 样本2: 多行描述</button>
+            <button onclick="loadSample3()">🎯 样本3: 基本格式</button>
+        </div>
+
+        <div id="result" class="result" style="display: none;">
+            <h3>解析结果：</h3>
+            <div id="resultContent"></div>
+        </div>
+
+        <div id="debug" class="result" style="display: none;">
+            <h3>调试信息：</h3>
+            <pre id="debugContent"></pre>
+        </div>
+    </div>
+
+    <script>
+        // 模拟解析函数（简化版）
+        function parseCargoText(text) {
+            const result = {};
+            const debugLog = [];
+
+            // 标准化文本
+            const correctedText = text.replace(/\s+/g, ' ').trim();
+            debugLog.push(`输入文本: "${text}"`);
+            debugLog.push(`标准化后: "${correctedText}"`);
+
+            // 1. 三元组解析："4件/8.95方/1210kg"
+            const tripleMatch = correctedText.match(/(\d+)\s*件\s*\/\s*(\d+(?:\.\d+)?)\s*方\s*\/\s*(\d+(?:\.\d+)?)\s*kg/i);
+            if (tripleMatch) {
+                result.pieces = parseInt(tripleMatch[1]);
+                result.volume = parseFloat(tripleMatch[2]);
+                result.weight = parseFloat(tripleMatch[3]);
+                result.packageType = 'pieces';
+                debugLog.push(`✅ 三元组匹配: ${result.pieces}件/${result.volume}方/${result.weight}kg`);
+            } else {
+                debugLog.push(`❌ 三元组未匹配`);
+            }
+
+            // 2. 详细尺寸解析
+            const sizeMatches = correctedText.match(/(?:尺寸)?(\d+)\s*\*\s*(\d+)\s*\*\s*(\d+)\s*\*\s*(\d+)\s*件/gi);
+            if (sizeMatches) {
+                debugLog.push(`✅ 尺寸匹配: ${sizeMatches}`);
+                const dimensions = [];
+                let totalPieces = 0;
+
+                for (const match of sizeMatches) {
+                    const sizeMatch = match.match(/(?:尺寸)?(\d+)\s*\*\s*(\d+)\s*\*\s*(\d+)\s*\*\s*(\d+)\s*件/i);
+                    if (sizeMatch) {
+                        const dim = {
+                            length: parseInt(sizeMatch[1]),
+                            width: parseInt(sizeMatch[2]),
+                            height: parseInt(sizeMatch[3]),
+                            quantity: parseInt(sizeMatch[4])
+                        };
+                        dimensions.push(dim);
+                        totalPieces += dim.quantity;
+                        debugLog.push(`  📏 尺寸: ${dim.length}×${dim.width}×${dim.height}mm, 数量: ${dim.quantity}件`);
+                    }
+                }
+
+                result.dimensions = dimensions;
+                debugLog.push(`📦 尺寸累计件数: ${totalPieces}件`);
+
+                // 验证件数一致性
+                if (result.pieces && totalPieces !== result.pieces) {
+                    debugLog.push(`⚠️ 件数不一致: 三元组${result.pieces}件 vs 尺寸累计${totalPieces}件`);
+                }
+            } else {
+                debugLog.push(`❌ 尺寸格式未匹配`);
+            }
+
+            // 3. 起运地解析
+            const originMatch = correctedText.match(/货在(.+?)(?=\s|$|，|。|-)/);
+            if (originMatch) {
+                result.origin = originMatch[1].trim();
+                debugLog.push(`✅ 起运地: ${result.origin}`);
+            }
+
+            // 4. 货物名称
+            if (!result.name) {
+                result.name = '普货';
+                debugLog.push(`📝 默认货物名称: ${result.name}`);
+            }
+
+            return { result, debugLog };
+        }
+
+        function testParsing() {
+            const input = document.getElementById('cargoInput').value;
+            const { result, debugLog } = parseCargoText(input);
+
+            // 显示结果
+            const resultDiv = document.getElementById('result');
+            const resultContent = document.getElementById('resultContent');
+            const debugDiv = document.getElementById('debug');
+            const debugContent = document.getElementById('debugContent');
+
+            resultDiv.style.display = 'block';
+            debugDiv.style.display = 'block';
+
+            resultContent.innerHTML = `
+                <div><strong>货物名称:</strong> ${result.name || '未识别'}</div>
+                <div><strong>件数:</strong> ${result.pieces || 0} 件</div>
+                <div><strong>重量:</strong> ${result.weight || 0} kg</div>
+                <div><strong>体积:</strong> ${result.volume || 0} cbm</div>
+                <div><strong>包装类型:</strong> ${result.packageType || '未知'}</div>
+                <div><strong>起运地:</strong> ${result.origin || '未设置'}</div>
+                <div><strong>尺寸数量:</strong> ${result.dimensions ? result.dimensions.length : 0} 种</div>
+                ${result.dimensions ? '<div><strong>尺寸详情:</strong><br>' +
+                    result.dimensions.map(d => `&nbsp;&nbsp;${d.length}×${d.width}×${d.height}mm (${d.quantity}件)`).join('<br>') +
+                '</div>' : ''}
+            `;
+
+            debugContent.textContent = debugLog.join('\n');
+
+            // 判断成功或失败
+            if (result.pieces > 0) {
+                resultDiv.className = 'result success';
+            } else {
+                resultDiv.className = 'result error';
+            }
+        }
+
+        function loadSample1() {
+            document.getElementById('cargoInput').value = `货在深圳  -TAS  4件/8.95方/1210kg
+尺寸1336*706*2005*2件
+2546*781*1300*2件
+尺寸mm`;
+        }
+
+        function loadSample2() {
+            document.getElementById('cargoInput').value = `Comm 运动器具
+数量：17箱
+尺寸：每箱48 x 48 x 58 厘米
+总重量：400公斤`;
+        }
+
+        function loadSample3() {
+            document.getElementById('cargoInput').value = `148*113*80/1
+168*113*72.5/1
+188.5*35.5*71/1
+单个托盘120KG`;
+        }
+
+        // 页面加载时自动测试
+        window.onload = function() {
+            loadSample1();
+            testParsing();
+        };
+    </script>
+</body>
+</html>
