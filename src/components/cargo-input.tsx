@@ -247,7 +247,7 @@ Packing?Weight:130`,
               className="mt-2"
             />
             <div className="mt-2">
-              <div className="grid grid-cols-6 gap-2">
+              <div className="grid grid-cols-8 gap-1">
                 <Button variant="outline" size="sm" onClick={() => loadSampleData('traditional', '洛杉矶')}>传统格式示例</Button>
                 <Button variant="outline" size="sm" onClick={() => loadSampleData('newFormat', '洛杉矶')}>批量格式示例</Button>
                 <Button variant="outline" size="sm" onClick={() => loadSampleData('latest', '洛杉矶')}>单托格式示例</Button>
