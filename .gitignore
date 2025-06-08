@@ -1,0 +1,62 @@
+# Dependencies
+node_modules/
+*/node_modules/
+
+# Next.js build output
+.next/
+*/.next/
+out/
+
+# Environment variables
+.env*
+
+# Debug files
+*.log
+*.js.map
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+uploads/
+
+# Test files
+test-*.js
+debug-*.js
+*-debug.js
+*-test.js
+batch-test-*.js
+*.py
+*.html
+
+# Build artifacts
+tsconfig.tsbuildinfo
+*.tsbuildinfo
+
+# Backup files
+*.backup
+*.bak
+
+# Cache directories
+.cache/
+.parcel-cache/
+
+# Lock files (keep only bun.lock)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# TypeScript
+*.d.ts.map
+
+# Misc
+*.swp
+*.swo
+*~

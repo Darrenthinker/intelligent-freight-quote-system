@@ -1,0 +1,16 @@
+export interface Dimension {
+  length: number; // cm
+  width: number; // cm
+  height: number; // cm
+  quantity: number;
+  unit: 'm' | 'cm' | 'mm'; // 单位：米、厘米、毫米
+}
+EOF  
+cd /home/project && cd freight-quote-system && cat > dimension_fix.txt << 'EOF'
+export interface Dimension {
+  length: number; // cm
+  width: number; // cm
+  height: number; // cm
+  quantity: number;
+  unit: 'm' | 'cm' | 'mm'; // 单位：米、厘米、毫米
+}

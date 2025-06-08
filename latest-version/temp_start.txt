@@ -1,0 +1,29 @@
+/*
+ * 国际货运重量术语说明：
+ *
+ * GW (Gross Weight) - 毛重：货物连同包装的总重量
+ * NW (Net Weight) - 净重：仅指货物本身的重量，不包括包装
+ * CW (Chargeable Weight) - 计费重：用于计算运费的重量，通常取实重和体积重的较大值
+ *
+ * 在国际贸易和物流中，这三种重量都很重要：
+ * - 毛重用于承运和搬运计算
+ * - 净重用于海关申报和贸易统计
+ * - 计费重用于运费计算
+ */
+
+// 货物信息解析工具函数
+import { getAirportCity, formatAirportDisplay } from './airport-codes';
+
+export interface CargoInfo {
+  name: string;
+  weight: number; // kg
+  volume: number; // cbm
+  pallets: number;
+  pieces: number;
+  dimensions: Dimension[];
+  destination?: string; // 目的地
+  destinationCode?: string; // 机场代码
+  origin?: string; // 货物所在地
+  packageType?: 'pallets' | 'boxes' | 'pieces'; // 包装类型
+}
+
