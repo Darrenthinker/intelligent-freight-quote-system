@@ -77,7 +77,7 @@ export default function Home() {
             <CardTitle>💡 系统功能说明</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 text-sm">
               <div className="space-y-2">
                 <h4 className="font-semibold text-blue-600">📊 数据识别模块</h4>
                 <ul className="text-gray-600 space-y-1">
@@ -89,7 +89,7 @@ export default function Home() {
                 </ul>
               </div>
               <div className="space-y-2">
-                <h4 className="font-semibold text-green-600">💰 智能报价模块</h4>
+                <h4 className="font-semibold text-green-600">📋 报价表管理</h4>
                 <ul className="text-gray-600 space-y-1">
                   <li>• 海运/空运双模式计算</li>
                   <li>• 体积重智能判断</li>
@@ -99,13 +99,23 @@ export default function Home() {
                 </ul>
               </div>
               <div className="space-y-2">
+                <h4 className="font-semibold text-orange-600">💰 智能报价</h4>
+                <ul className="text-gray-600 space-y-1">
+                  <li>• 批量数据识别</li>
+                  <li>• 自动识别异常数据</li>
+                  <li>• 智能算费率生成</li>
+                  <li>• 报价格式自动输出</li>
+                  <li>• 持续监控优化</li>
+                </ul>
+              </div>
+              <div className="space-y-2">
                 <h4 className="font-semibold text-purple-600">🤖 自动化测试</h4>
                 <ul className="text-gray-600 space-y-1">
-                  <li>• 批量数据识别测试</li>
-                  <li>• 自动问题检测诊断</li>
-                  <li>• 智能修复建议生成</li>
-                  <li>• 测试报告自动导出</li>
-                  <li>• 持续质量监控</li>
+                  <li>• 自动化测试</li>
+                  <li>• 自动识别异常数据</li>
+                  <li>• 智能修复建议</li>
+                  <li>• 报价格式自动输出</li>
+                  <li>• 持续监控优化</li>
                 </ul>
               </div>
             </div>
