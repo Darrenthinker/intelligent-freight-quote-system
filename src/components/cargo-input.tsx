@@ -247,45 +247,39 @@ Packing?Weight:130`,
               className="mt-2"
             />
             <div className="mt-2">
-              <div className="grid grid-cols-8 gap-1">
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('traditional', '洛杉矶')}>传统格式示例</Button>
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('newFormat', '洛杉矶')}>批量格式示例</Button>
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('latest', '洛杉矶')}>单托格式示例</Button>
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('table', '洛杉矶')}>表格格式示例</Button>
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('boxSpec', '洛杉矶')}>箱规格式示例</Button>
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('commodity', '洛杉矶')}>商品格式示例</Button>
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('pallet', '洛杉矶')}>托盘格式示例</Button>
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('multiSize', '洛杉矶')}>多尺寸格式示例</Button>
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('air')}>空运格式示例</Button>
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('moreAirport')}>更多机场代码示例</Button>
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('box')}>木箱格式示例</Button>
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('electric')} className="border-orange-300 text-orange-600">带电货物示例</Button>
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('battery')} className="border-red-300 text-red-600">电池类示例</Button>
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('general')}>普通货物示例</Button>
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('boxCount')} className="border-blue-300 text-blue-600">箱数格式示例</Button>
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('complex')} className="border-purple-300 text-purple-600">复杂格式示例</Button>
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('singleItem')} className="border-indigo-300 text-indigo-600">单件规格示例</Button>
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('chineseVolume')} className="border-green-300 text-green-600">中文体积示例</Button>
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('led')} className="border-yellow-300 text-yellow-600">LED产品示例</Button>
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('questionMark')} className="border-gray-400 text-gray-700">问号字符修复示例</Button>
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('weightVolumePieces')} className="border-teal-400 text-teal-700">重量/体积/件数格式</Button>
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('flexibleOrder')} className="border-cyan-400 text-cyan-700">智能顺序识别</Button>
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('palletDetail')} className="border-red-400 text-red-700">托盘详细格式示例</Button>
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('delTriple')} className="border-pink-400 text-pink-700">DEL三元组示例</Button>
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('triple1')} className="border-blue-400 text-blue-700">三元组格式1</Button>
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('triple2')} className="border-red-400 text-red-700">三元组格式2</Button>
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('triple3')} className="border-green-400 text-green-700">三元组格式3</Button>
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('triple4')} className="border-yellow-400 text-yellow-700">三元组格式4</Button>
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('triple5')} className="border-purple-400 text-purple-700">三元组格式5</Button>
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('ctns')} className="border-orange-400 text-orange-700">CTNS格式+箱规示例</Button>
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('ccu')} className="border-indigo-400 text-indigo-700">CCU新格式示例</Button>
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('khi')} className="border-purple-400 text-purple-700">KHI双斜杠格式示例</Button>
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('beg')} className="border-blue-400 text-blue-700">BEG新格式示例</Button>
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('pek')} className="border-red-400 text-red-700">PEK新格式示例</Button>
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('simpleTriple')} className="border-green-400 text-green-700">简化三元组格式示例</Button>
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('bom')} className="border-blue-400 text-blue-700">BOM新格式示例</Button>
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('gw')} className="border-blue-400 text-blue-700">GW格式示例</Button>
-                <Button variant="outline" size="sm" onClick={() => loadSampleData('nw')} className="border-blue-400 text-blue-700">NW格式示例</Button>
+              <div className="grid grid-cols-12 gap-1">
+                <Button variant="outline" size="sm" onClick={() => loadSampleData('traditional')}>传统格式</Button>
+                <Button variant="outline" size="sm" onClick={() => loadSampleData('newFormat')}>批量格式</Button>
+                <Button variant="outline" size="sm" onClick={() => loadSampleData('latest')}>单托格式</Button>
+                <Button variant="outline" size="sm" onClick={() => loadSampleData('table')}>表格格式</Button>
+                <Button variant="outline" size="sm" onClick={() => loadSampleData('boxSpec')}>箱规格式</Button>
+                <Button variant="outline" size="sm" onClick={() => loadSampleData('commodity')}>商品格式</Button>
+                <Button variant="outline" size="sm" onClick={() => loadSampleData('pallet')}>托盘格式</Button>
+                <Button variant="outline" size="sm" onClick={() => loadSampleData('multiSize')}>多尺寸格式</Button>
+                <Button variant="outline" size="sm" onClick={() => loadSampleData('air')}>空运格式</Button>
+                <Button variant="outline" size="sm" onClick={() => loadSampleData('box')}>木箱格式</Button>
+                <Button variant="outline" size="sm" onClick={() => loadSampleData('electric')}>带电货物</Button>
+                <Button variant="outline" size="sm" onClick={() => loadSampleData('battery')}>电池类</Button>
+                <Button variant="outline" size="sm" onClick={() => loadSampleData('general')}>普通货物</Button>
+                <Button variant="outline" size="sm" onClick={() => loadSampleData('boxCount')}>箱数格式</Button>
+                <Button variant="outline" size="sm" onClick={() => loadSampleData('complex')}>复杂格式</Button>
+                <Button variant="outline" size="sm" onClick={() => loadSampleData('singleItem')}>单件规格</Button>
+                <Button variant="outline" size="sm" onClick={() => loadSampleData('chineseVolume')}>中文体积</Button>
+                <Button variant="outline" size="sm" onClick={() => loadSampleData('led')}>LED产品</Button>
+                <Button variant="outline" size="sm" onClick={() => loadSampleData('delTriple')}>DEL三元组</Button>
+                <Button variant="outline" size="sm" onClick={() => loadSampleData('triple1')}>三元组格式1</Button>
+                <Button variant="outline" size="sm" onClick={() => loadSampleData('triple2')}>三元组格式2</Button>
+                <Button variant="outline" size="sm" onClick={() => loadSampleData('triple3')}>三元组格式3</Button>
+                <Button variant="outline" size="sm" onClick={() => loadSampleData('triple4')}>三元组格式4</Button>
+                <Button variant="outline" size="sm" onClick={() => loadSampleData('triple5')}>三元组格式5</Button>
+                <Button variant="outline" size="sm" onClick={() => loadSampleData('ctns')}>CTNS格式</Button>
+                <Button variant="outline" size="sm" onClick={() => loadSampleData('ccu')}>CCU格式</Button>
+                <Button variant="outline" size="sm" onClick={() => loadSampleData('khi')}>KHI格式</Button>
+                <Button variant="outline" size="sm" onClick={() => loadSampleData('beg')}>BEG格式</Button>
+                <Button variant="outline" size="sm" onClick={() => loadSampleData('pek')}>PEK格式</Button>
+                <Button variant="outline" size="sm" onClick={() => loadSampleData('bom')}>BOM格式</Button>
+                <Button variant="outline" size="sm" onClick={() => loadSampleData('gw')}>GW格式</Button>
+                <Button variant="outline" size="sm" onClick={() => loadSampleData('nw')}>NW格式</Button>
               </div>
             </div>
           </div>
@@ -293,22 +287,17 @@ Packing?Weight:130`,
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
               <Label htmlFor="transport-mode">运输方式</Label>
-              <select
-                id="transport-mode"
-                value="air"
-                onChange={() => {}} // 暂时只有一个选项，无需处理变更
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="air">国际空运</option>
-              </select>
+              <div className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900">
+                国际空运
+              </div>
             </div>
             <div>
-              <Label htmlFor="origin">货物所在地</Label>
+              <Label htmlFor="origin">起运地</Label>
               <Input
                 id="origin"
                 value={origin}
                 onChange={(e) => setOrigin(e.target.value)}
-                placeholder="例: 广州"
+                placeholder="等待确认"
               />
             </div>
             <div>
@@ -317,7 +306,7 @@ Packing?Weight:130`,
                 id="destination"
                 value={destination}
                 onChange={(e) => setDestination(e.target.value)}
-                placeholder="例: 洛杉矶"
+                placeholder="等待确认"
               />
             </div>
           </div>

@@ -3,14 +3,11 @@
 import { useState } from 'react';
 import { CargoInput } from '@/components/cargo-input';
 import { QuoteResults } from '@/components/quote-results';
-// import { AutoTestPanel } from '@/components/auto-test-panel';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { Quote } from '@/lib/freight-rates';
 
 export default function Home() {
   const [quotes, setQuotes] = useState<Quote[]>([]);
-  const [activeTab, setActiveTab] = useState<'input' | 'test'>('input');
 
   const handleQuotesGenerated = (newQuotes: Quote[]) => {
     setQuotes(newQuotes);
@@ -29,47 +26,15 @@ export default function Home() {
           </p>
         </div>
 
-        {/* 标签页导航 */}
-        <Card className="mb-6">
-          <CardHeader>
-            <div className="flex space-x-4">
-              <Button
-                variant={activeTab === 'input' ? 'default' : 'outline'}
-                onClick={() => setActiveTab('input')}
-                className="px-6"
-              >
-                📦 数据输入与报价
-              </Button>
-              <Button
-                variant={activeTab === 'test' ? 'default' : 'outline'}
-                onClick={() => setActiveTab('test')}
-                className="px-6"
-              >
-                🤖 自动化测试系统
-              </Button>
-            </div>
-          </CardHeader>
-        </Card>
+        {/* 直接显示货物信息输入 */}
+        <div className="space-y-8">
+          <CargoInput onQuotesGenerated={handleQuotesGenerated} />
 
-        {/* 标签页内容 */}
-        {activeTab === 'input' && (
-          <div className="space-y-8">
-            {/* 货物信息输入 */}
-            <CargoInput onQuotesGenerated={handleQuotesGenerated} />
-
-            {/* 报价结果 */}
-            {quotes.length > 0 && (
-              <QuoteResults quotes={quotes} />
-            )}
-          </div>
-        )}
-
-        {activeTab === 'test' && (
-          <div className="p-8 text-center">
-            <h2 className="text-2xl font-bold mb-4">测试功能暂时不可用</h2>
-            <p>请使用"数据输入与报价"功能测试V111版本的修复效果</p>
-          </div>
-        )}
+          {/* 报价结果 */}
+          {quotes.length > 0 && (
+            <QuoteResults quotes={quotes} />
+          )}
+        </div>
 
         {/* 系统说明 */}
         <Card className="mt-8">
