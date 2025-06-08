@@ -292,6 +292,17 @@ Packing?Weight:130`,
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
+              <Label htmlFor="transport-mode">运输方式</Label>
+              <select
+                id="transport-mode"
+                value="air"
+                onChange={() => {}} // 暂时只有一个选项，无需处理变更
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="air">国际空运</option>
+              </select>
+            </div>
+            <div>
               <Label htmlFor="origin">货物所在地</Label>
               <Input
                 id="origin"
@@ -308,12 +319,6 @@ Packing?Weight:130`,
                 onChange={(e) => setDestination(e.target.value)}
                 placeholder="例: 洛杉矶"
               />
-            </div>
-            <div>
-              <Label htmlFor="transport-mode">运输方式</Label>
-              <div className="w-full px-3 py-2 bg-blue-50 border border-blue-200 rounded-md text-blue-800 font-medium">
-                🛫 国际空运
-              </div>
             </div>
           </div>
         </CardContent>
