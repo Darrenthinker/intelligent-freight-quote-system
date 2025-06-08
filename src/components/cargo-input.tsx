@@ -17,7 +17,6 @@ export function CargoInput({ onQuotesGenerated }: CargoInputProps) {
   const [cargoText, setCargoText] = useState('');
   const [origin, setOrigin] = useState('等待确认');
   const [destination, setDestination] = useState('');
-  const [transportMode, setTransportMode] = useState<'sea' | 'air' | 'both'>('both');
   const [parsedCargo, setParsedCargo] = useState<Partial<CargoInfo>>({});
   const [calculations, setCalculations] = useState<CalculationResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -181,8 +180,8 @@ Packing?Weight:130`,
         setDestination(parsed.destination);
       }
 
-      // 计算结果
-      const calculations = calculateCargoMetrics(parsed, 'sea');
+      // 计算结果 - 使用空运计算方式
+      const calculations = calculateCargoMetrics(parsed, 'air');
       console.log('🔥 计算结果:', calculations);
       setCalculations(calculations);
     } else {
@@ -207,22 +206,17 @@ Packing?Weight:130`,
 
     setIsLoading(true);
     try {
-      const modes = transportMode === 'both' ? ['sea', 'air'] as const : [transportMode as 'sea' | 'air'];
-      const allQuotes: Quote[] = [];
+      // 固定使用空运模式
+      const modeCalc = calculateCargoMetrics(parsedCargo, 'air');
+      const quotes = generateQuotes(
+        origin,
+        destination,
+        modeCalc.chargeableWeight,
+        modeCalc.totalVolume,
+        'air'
+      );
 
-      for (const mode of modes) {
-        const modeCalc = calculateCargoMetrics(parsedCargo, mode);
-        const quotes = generateQuotes(
-          origin,
-          destination,
-          modeCalc.chargeableWeight,
-          modeCalc.totalVolume,
-          mode
-        );
-        allQuotes.push(...quotes);
-      }
-
-      onQuotesGenerated(allQuotes);
+      onQuotesGenerated(quotes);
     } catch (error) {
       console.error('生成报价失败:', error);
       alert('生成报价失败，请检查输入信息');
@@ -317,16 +311,9 @@ Packing?Weight:130`,
             </div>
             <div>
               <Label htmlFor="transport-mode">运输方式</Label>
-              <select
-                id="transport-mode"
-                value={transportMode}
-                onChange={(e) => setTransportMode(e.target.value as 'sea' | 'air' | 'both')}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="both">海运+空运</option>
-                <option value="sea">仅海运</option>
-                <option value="air">仅空运</option>
-              </select>
+              <div className="w-full px-3 py-2 bg-blue-50 border border-blue-200 rounded-md text-blue-800 font-medium">
+                🛫 国际空运
+              </div>
             </div>
           </div>
         </CardContent>
